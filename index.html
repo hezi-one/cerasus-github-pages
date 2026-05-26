@@ -1,0 +1,875 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cerasus — Hezi Portfolio</title>
+  <meta name="description" content="Cerasus: Landscape society in order — Hezi Portfolio web edition.">
+  <style>
+    :root {
+      --ink: #f3f2ec;
+      --muted: rgba(243, 242, 236, .68);
+      --deep: #202721;
+      --deep-2: #101410;
+      --paper: #f5f3ed;
+      --line: rgba(243, 242, 236, .18);
+      --green: #63735f;
+      --shadow: 0 24px 70px rgba(0, 0, 0, .34);
+      --serif: "Cormorant Garamond", "Times New Roman", "Songti SC", "SimSun", serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 0%, rgba(111, 139, 103, .18), transparent 34rem),
+        linear-gradient(180deg, #252c26 0%, var(--deep-2) 70%);
+      font-family: var(--sans);
+      line-height: 1.5;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.8), transparent 70%);
+      z-index: -1;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: .85rem clamp(1rem, 4vw, 3rem);
+      backdrop-filter: blur(16px);
+      background: rgba(16, 20, 16, .68);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand {
+      font-family: var(--serif);
+      letter-spacing: .42em;
+      text-transform: uppercase;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      white-space: nowrap;
+    }
+    .site-header nav { display: flex; gap: .35rem; flex-wrap: wrap; justify-content: flex-end; }
+    .site-header nav a {
+      color: var(--muted);
+      font-size: .78rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: .45rem .7rem;
+      transition: .2s ease;
+    }
+    .site-header nav a:hover { color: var(--ink); border-color: var(--line); background: rgba(255,255,255,.04); }
+
+    main { width: min(1440px, 100%); margin: 0 auto; }
+    .hero {
+      min-height: calc(100vh - 62px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(340px, .82fr);
+      align-items: center;
+      gap: clamp(3rem, 8vw, 10rem);
+      padding: clamp(2rem, 5vw, 6rem) clamp(2rem, 6vw, 7rem);
+      overflow: hidden;
+    }
+    .kicker, .eyebrow {
+      margin: 0 0 1rem;
+      color: var(--muted);
+      font-size: .78rem;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+    }
+    h1, h2 { font-family: var(--serif); font-weight: 400; margin: 0; }
+    h1 {
+      font-size: clamp(5rem, 16vw, 13rem);
+      letter-spacing: .12em;
+      line-height: .9;
+      text-transform: uppercase;
+      color: rgba(243,242,236,.96);
+      text-shadow:
+        0 0 24px rgba(255,255,255,.05),
+        0 0 80px rgba(255,255,255,.03);
+    }
+    .hero h2 {
+      margin-top: 1.4rem;
+      font-size: clamp(1.15rem, 2.4vw, 2.2rem);
+      color: var(--muted);
+      letter-spacing: .08em;
+    }
+    .hero-copy p:last-child { max-width: 39rem; color: var(--muted); margin: 2rem 0 0; }
+    .meta-strip {
+      display: flex;
+      gap: .7rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    .meta-strip span {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: .55rem .82rem;
+      color: var(--muted);
+      background: rgba(255,255,255,.035);
+      font-size: .82rem;
+    }
+    .hero-plate {
+      padding: clamp(.7rem, 2vw, 1rem);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.035);
+      border-radius: 1.8rem;
+      box-shadow: 0 40px 100px rgba(0,0,0,.45);
+      width: min(420px, 100%);
+      justify-self: end;
+      transform: translateX(70px) rotate(.6deg);
+      backdrop-filter: blur(20px);
+    }
+    .hero-plate img {
+      width: 100%;
+      display: block;
+      border-radius: 1rem;
+      background: var(--paper);
+    }
+
+    .portfolio-section {
+      padding: clamp(3rem, 7vw, 8rem) clamp(1rem, 5vw, 5rem);
+      border-top: 1px solid var(--line);
+    }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(260px, .45fr) minmax(280px, .55fr);
+      gap: clamp(1.2rem, 4vw, 4rem);
+      align-items: end;
+      margin-bottom: clamp(1.8rem, 5vw, 4rem);
+    }
+    .section-head h2 {
+      font-size: clamp(2.4rem, 7vw, 6.7rem);
+      line-height: .9;
+      letter-spacing: .04em;
+    }
+    .section-head h2 span {
+      display: block;
+      margin-top: .65rem;
+      font-family: var(--sans);
+      font-size: clamp(1.2rem, 2vw, 1.7rem);
+      color: var(--muted);
+      letter-spacing: .28em;
+      font-weight: 300;
+    }
+    .section-head > p:last-child { color: var(--muted); max-width: 38rem; margin: 0; }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: clamp(1rem, 2vw, 1.6rem);
+    }
+    .work-card {
+      grid-column: span 4;
+      margin: 0;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .55s ease, transform .55s ease, border-color .2s ease;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 1.25rem;
+      background: rgba(255,255,255,.045);
+      overflow: hidden;
+      box-shadow: 0 16px 42px rgba(0,0,0,.24);
+    }
+    .work-card.visible { opacity: 1; transform: translateY(0); }
+    .work-card.landscape { grid-column: span 6; }
+    .work-card.text-panel { grid-column: span 4; }
+    .work-card:hover { border-color: rgba(255,255,255,.32); }
+    .image-button {
+      display: block;
+      width: 100%;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      cursor: zoom-in;
+    }
+    .work-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: var(--paper);
+    }
+    figcaption {
+      min-height: 4.25rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: .9rem 1rem 1rem;
+      color: var(--muted);
+      font-size: .86rem;
+      border-top: 1px solid rgba(255,255,255,.1);
+    }
+    figcaption span { color: var(--ink); }
+    figcaption small { white-space: nowrap; opacity: .72; }
+
+    .footer {
+      padding: 7rem clamp(1rem, 5vw, 5rem);
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .footer strong { color: var(--ink); font-family: var(--serif); letter-spacing: .2em; font-size: 1.3rem; }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 3.5rem 1rem 1rem;
+      background: rgba(0,0,0,.86);
+      backdrop-filter: blur(10px);
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: min(96vw, 1400px);
+      max-height: 84vh;
+      object-fit: contain;
+      border-radius: .65rem;
+      box-shadow: 0 30px 90px rgba(0,0,0,.52);
+      background: var(--paper);
+    }
+    .lightbox-caption {
+      position: fixed;
+      left: 1rem;
+      bottom: 1rem;
+      right: 1rem;
+      text-align: center;
+      color: var(--ink);
+      font-size: .9rem;
+      letter-spacing: .04em;
+    }
+    .lb-close, .lb-prev, .lb-next {
+      position: fixed;
+      border: 1px solid rgba(255,255,255,.28);
+      background: rgba(255,255,255,.08);
+      color: var(--ink);
+      border-radius: 999px;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: .2s ease;
+    }
+    .lb-close:hover, .lb-prev:hover, .lb-next:hover { background: rgba(255,255,255,.16); }
+    .lb-close { top: 1rem; right: 1rem; width: 2.75rem; height: 2.75rem; font-size: 1.45rem; }
+    .lb-prev, .lb-next { top: 50%; width: 3rem; height: 3rem; transform: translateY(-50%); font-size: 1.8rem; }
+    .lb-prev { left: 1rem; }
+    .lb-next { right: 1rem; }
+
+    .audio-toggle {
+      position: fixed;
+      right: clamp(1rem, 3vw, 2rem);
+      bottom: clamp(1rem, 3vw, 2rem);
+      z-index: 18;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      min-width: 7.5rem;
+      min-height: 2.8rem;
+      border: 1px solid rgba(255,255,255,.26);
+      border-radius: 999px;
+      padding: .68rem .95rem;
+      color: var(--ink);
+      background: rgba(16,20,16,.7);
+      box-shadow: 0 18px 44px rgba(0,0,0,.28);
+      backdrop-filter: blur(14px);
+      cursor: pointer;
+      font: 600 .76rem/1 var(--sans);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: border-color .2s ease, background .2s ease, transform .2s ease;
+    }
+    .audio-toggle:hover {
+      border-color: rgba(255,255,255,.44);
+      background: rgba(255,255,255,.1);
+      transform: translateY(-1px);
+    }
+    .audio-toggle::before {
+      content: "";
+      width: .55rem;
+      height: .55rem;
+      border-radius: 50%;
+      background: rgba(243,242,236,.42);
+      box-shadow: 0 0 0 .25rem rgba(243,242,236,.08);
+    }
+    .audio-toggle.is-playing::before {
+      background: #f3f2ec;
+      box-shadow: 0 0 18px rgba(243,242,236,.58);
+    }
+
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-plate {
+        max-width: 520px;
+        justify-self: center;
+        transform: rotate(.4deg);
+      }
+      .section-head { grid-template-columns: 1fr; }
+      .work-card, .work-card.landscape, .work-card.text-panel { grid-column: span 6; }
+    }
+    @media (max-width: 680px) {
+      .site-header { align-items: flex-start; flex-direction: column; }
+      .site-header nav { justify-content: flex-start; }
+      h1 { font-size: clamp(3.2rem, 20vw, 6.2rem); }
+      .work-grid { grid-template-columns: 1fr; }
+      .work-card, .work-card.landscape, .work-card.text-panel { grid-column: span 1; }
+      .lb-prev, .lb-next { display: none; }
+      figcaption { flex-direction: column; gap: .3rem; }
+      .audio-toggle { min-width: 3rem; padding-inline: .8rem; }
+      .audio-toggle span { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top">Cerasus</a>
+    <nav aria-label="Portfolio sections">
+      <a href="#intro">Portfolio / 作品集</a>
+          <a href="#part-one">PONE</a>
+          <a href="#part-two">PTWO</a>
+          <a href="#part-three">PTHREE</a>
+          <a href="#part-four">PFOUR</a>
+          <a href="#part-five">PFIVE</a>
+    </nav>
+  </header>
+
+  <audio id="backgroundMusic" preload="metadata" loop>
+    <source src="assets/audio/cerasus-sakura.mp3" type="audio/mpeg">
+  </audio>
+  <button class="audio-toggle" id="audioToggle" type="button" aria-pressed="false">
+    <span>Play Music</span>
+  </button>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="title">
+      <div class="hero-copy">
+        <p class="kicker">Hezi Portfolio</p>
+        <h1 id="title">Cerasus</h1>
+        <h2>Landscape society in order</h2>
+        <p>以“被涂白的树”为线索，将南京林业大学中的樱花树标记转化为一组可观看、可凝视、可被重新理解的视觉秩序。</p>
+        <div class="meta-strip" aria-label="Project metadata">
+          <span>Nanjing / 2021</span>
+          <span>5 Parts</span>
+          <span>56 portfolio plates</span>
+        </div>
+      </div>
+      <figure class="hero-plate">
+        <img src="assets/pages/page-01.jpg" alt="Cerasus portfolio cover">
+      </figure>
+    </section>
+
+    
+      <section class="portfolio-section" id="intro">
+        <div class="section-head">
+          <p class="eyebrow">Portfolio / 作品集</p>
+          <h2>Cerasus<span>Landscape society in order</span></h2>
+          <p>A web edition of Hezi Portfolio, translated from the original PDF into a responsive online portfolio layout.</p>
+        </div>
+        <div class="work-grid">
+          <figure class="work-card landscape" data-caption="Cerasus / Landscape society in order / Hezi Portfolio" data-page="2">
+            <button class="image-button" type="button" aria-label="Open Cerasus / Landscape society in order / Hezi Portfolio">
+              <img src="assets/pages/page-02.jpg" alt="Cerasus / Landscape society in order / Hezi Portfolio" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Cerasus / Landscape society in order / Hezi Portfolio</span><small>Page 02</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Overleaf: Cerasus #1, #2, #3, #4, #5, Nanjing, 2021" data-page="3">
+            <button class="image-button" type="button" aria-label="Open Overleaf: Cerasus #1, #2, #3, #4, #5, Nanjing, 2021">
+              <img src="assets/pages/page-03.jpg" alt="Overleaf: Cerasus #1, #2, #3, #4, #5, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Overleaf: Cerasus #1, #2, #3, #4, #5, Nanjing, 2021</span><small>Page 03</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Cerasus #1, Nanjing, 2021" data-page="4">
+            <button class="image-button" type="button" aria-label="Open Cerasus #1, Nanjing, 2021">
+              <img src="assets/pages/page-04.jpg" alt="Cerasus #1, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Cerasus #1, Nanjing, 2021</span><small>Page 04</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Cerasus #2, Nanjing, 2021" data-page="5">
+            <button class="image-button" type="button" aria-label="Open Cerasus #2, Nanjing, 2021">
+              <img src="assets/pages/page-05.jpg" alt="Cerasus #2, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Cerasus #2, Nanjing, 2021</span><small>Page 05</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Cerasus #3, Nanjing, 2021" data-page="6">
+            <button class="image-button" type="button" aria-label="Open Cerasus #3, Nanjing, 2021">
+              <img src="assets/pages/page-06.jpg" alt="Cerasus #3, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Cerasus #3, Nanjing, 2021</span><small>Page 06</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Cerasus #4, Nanjing, 2021" data-page="7">
+            <button class="image-button" type="button" aria-label="Open Cerasus #4, Nanjing, 2021">
+              <img src="assets/pages/page-07.jpg" alt="Cerasus #4, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Cerasus #4, Nanjing, 2021</span><small>Page 07</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Cerasus #5, Nanjing, 2021" data-page="8">
+            <button class="image-button" type="button" aria-label="Open Cerasus #5, Nanjing, 2021">
+              <img src="assets/pages/page-08.jpg" alt="Cerasus #5, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Cerasus #5, Nanjing, 2021</span><small>Page 08</small></figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="portfolio-section" id="part-one">
+        <div class="section-head">
+          <p class="eyebrow">PART ONE</p>
+          <h2>第一部分<span>发现</span></h2>
+          <p>Close observations of painted trunks, isolated from the larger landscape and read as repeated signs.</p>
+        </div>
+        <div class="work-grid">
+          <figure class="work-card landscape text-panel" data-caption="PART ONE / 第一部分 / 发现" data-page="9">
+            <button class="image-button" type="button" aria-label="Open PART ONE / 第一部分 / 发现">
+              <img src="assets/pages/page-09.jpg" alt="PART ONE / 第一部分 / 发现" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>PART ONE / 第一部分 / 发现</span><small>Page 09</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #21, Nanjing, 2021" data-page="10">
+            <button class="image-button" type="button" aria-label="Open Untitle #21, Nanjing, 2021">
+              <img src="assets/pages/page-10.jpg" alt="Untitle #21, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #21, Nanjing, 2021</span><small>Page 10</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #2, Nanjing, 2021" data-page="11">
+            <button class="image-button" type="button" aria-label="Open Untitle #2, Nanjing, 2021">
+              <img src="assets/pages/page-11.jpg" alt="Untitle #2, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #2, Nanjing, 2021</span><small>Page 11</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #31, Nanjing, 2021" data-page="12">
+            <button class="image-button" type="button" aria-label="Open Untitle #31, Nanjing, 2021">
+              <img src="assets/pages/page-12.jpg" alt="Untitle #31, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #31, Nanjing, 2021</span><small>Page 12</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #453, Nanjing, 2021" data-page="13">
+            <button class="image-button" type="button" aria-label="Open Untitle #453, Nanjing, 2021">
+              <img src="assets/pages/page-13.jpg" alt="Untitle #453, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #453, Nanjing, 2021</span><small>Page 13</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #15, Nanjing, 2021" data-page="14">
+            <button class="image-button" type="button" aria-label="Open Untitle #15, Nanjing, 2021">
+              <img src="assets/pages/page-14.jpg" alt="Untitle #15, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #15, Nanjing, 2021</span><small>Page 14</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #36, Nanjing, 2021" data-page="15">
+            <button class="image-button" type="button" aria-label="Open Untitle #36, Nanjing, 2021">
+              <img src="assets/pages/page-15.jpg" alt="Untitle #36, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #36, Nanjing, 2021</span><small>Page 15</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle Cerasus #1, Nanjing, 2021" data-page="16">
+            <button class="image-button" type="button" aria-label="Open Untitle Cerasus #1, Nanjing, 2021">
+              <img src="assets/pages/page-16.jpg" alt="Untitle Cerasus #1, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle Cerasus #1, Nanjing, 2021</span><small>Page 16</small></figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="portfolio-section" id="part-two">
+        <div class="section-head">
+          <p class="eyebrow">PART TWO</p>
+          <h2>第二部分<span>观看</span></h2>
+          <p>The viewing distance shifts: the tree bodies become figures, postures, and interfaces between order and growth.</p>
+        </div>
+        <div class="work-grid">
+          <figure class="work-card landscape text-panel" data-caption="PART TWO / 第二部分 / 观看" data-page="17">
+            <button class="image-button" type="button" aria-label="Open PART TWO / 第二部分 / 观看">
+              <img src="assets/pages/page-17.jpg" alt="PART TWO / 第二部分 / 观看" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>PART TWO / 第二部分 / 观看</span><small>Page 17</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #24, Nanjing, 2021" data-page="18">
+            <button class="image-button" type="button" aria-label="Open Untitle #24, Nanjing, 2021">
+              <img src="assets/pages/page-18.jpg" alt="Untitle #24, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #24, Nanjing, 2021</span><small>Page 18</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #43, Nanjing, 2021" data-page="19">
+            <button class="image-button" type="button" aria-label="Open Untitle #43, Nanjing, 2021">
+              <img src="assets/pages/page-19.jpg" alt="Untitle #43, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #43, Nanjing, 2021</span><small>Page 19</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #12, Nanjing, 2021" data-page="20">
+            <button class="image-button" type="button" aria-label="Open Untitle #12, Nanjing, 2021">
+              <img src="assets/pages/page-20.jpg" alt="Untitle #12, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #12, Nanjing, 2021</span><small>Page 20</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #16, Nanjing, 2021" data-page="21">
+            <button class="image-button" type="button" aria-label="Open Untitle #16, Nanjing, 2021">
+              <img src="assets/pages/page-21.jpg" alt="Untitle #16, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #16, Nanjing, 2021</span><small>Page 21</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #72, Nanjing, 2021" data-page="22">
+            <button class="image-button" type="button" aria-label="Open Untitle #72, Nanjing, 2021">
+              <img src="assets/pages/page-22.jpg" alt="Untitle #72, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #72, Nanjing, 2021</span><small>Page 22</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #132, Nanjing, 2021" data-page="23">
+            <button class="image-button" type="button" aria-label="Open Untitle #132, Nanjing, 2021">
+              <img src="assets/pages/page-23.jpg" alt="Untitle #132, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #132, Nanjing, 2021</span><small>Page 23</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #113, Nanjing, 2021" data-page="24">
+            <button class="image-button" type="button" aria-label="Open Untitle #113, Nanjing, 2021">
+              <img src="assets/pages/page-24.jpg" alt="Untitle #113, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #113, Nanjing, 2021</span><small>Page 24</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #51, Nanjing, 2021" data-page="25">
+            <button class="image-button" type="button" aria-label="Open Untitle #51, Nanjing, 2021">
+              <img src="assets/pages/page-25.jpg" alt="Untitle #51, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #51, Nanjing, 2021</span><small>Page 25</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #15, Nanjing, 2021" data-page="26">
+            <button class="image-button" type="button" aria-label="Open Untitle #15, Nanjing, 2021">
+              <img src="assets/pages/page-26.jpg" alt="Untitle #15, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #15, Nanjing, 2021</span><small>Page 26</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle Cerasus #2, Nanjing, 2021" data-page="27">
+            <button class="image-button" type="button" aria-label="Open Untitle Cerasus #2, Nanjing, 2021">
+              <img src="assets/pages/page-27.jpg" alt="Untitle Cerasus #2, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle Cerasus #2, Nanjing, 2021</span><small>Page 27</small></figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="portfolio-section" id="part-three">
+        <div class="section-head">
+          <p class="eyebrow">PART THREE</p>
+          <h2>第三部分<span>凝视</span></h2>
+          <p>Night images turn the white-painted trunks into luminous objects, separating them from the surrounding dark field.</p>
+        </div>
+        <div class="work-grid">
+          <figure class="work-card landscape text-panel" data-caption="PART THREE / 第三部分 / 凝视" data-page="28">
+            <button class="image-button" type="button" aria-label="Open PART THREE / 第三部分 / 凝视">
+              <img src="assets/pages/page-28.jpg" alt="PART THREE / 第三部分 / 凝视" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>PART THREE / 第三部分 / 凝视</span><small>Page 28</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #1, Nanjing, 2021" data-page="29">
+            <button class="image-button" type="button" aria-label="Open Untitle #1, Nanjing, 2021">
+              <img src="assets/pages/page-29.jpg" alt="Untitle #1, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #1, Nanjing, 2021</span><small>Page 29</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #2, Nanjing, 2021" data-page="30">
+            <button class="image-button" type="button" aria-label="Open Untitle #2, Nanjing, 2021">
+              <img src="assets/pages/page-30.jpg" alt="Untitle #2, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #2, Nanjing, 2021</span><small>Page 30</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #3, Nanjing, 2021" data-page="31">
+            <button class="image-button" type="button" aria-label="Open Untitle #3, Nanjing, 2021">
+              <img src="assets/pages/page-31.jpg" alt="Untitle #3, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #3, Nanjing, 2021</span><small>Page 31</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #4, Nanjing, 2021" data-page="32">
+            <button class="image-button" type="button" aria-label="Open Untitle #4, Nanjing, 2021">
+              <img src="assets/pages/page-32.jpg" alt="Untitle #4, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #4, Nanjing, 2021</span><small>Page 32</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #5, Nanjing, 2021" data-page="33">
+            <button class="image-button" type="button" aria-label="Open Untitle #5, Nanjing, 2021">
+              <img src="assets/pages/page-33.jpg" alt="Untitle #5, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #5, Nanjing, 2021</span><small>Page 33</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #6, Nanjing, 2021" data-page="34">
+            <button class="image-button" type="button" aria-label="Open Untitle #6, Nanjing, 2021">
+              <img src="assets/pages/page-34.jpg" alt="Untitle #6, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #6, Nanjing, 2021</span><small>Page 34</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #7, Nanjing, 2021" data-page="35">
+            <button class="image-button" type="button" aria-label="Open Untitle #7, Nanjing, 2021">
+              <img src="assets/pages/page-35.jpg" alt="Untitle #7, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #7, Nanjing, 2021</span><small>Page 35</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #8, Nanjing, 2021" data-page="36">
+            <button class="image-button" type="button" aria-label="Open Untitle #8, Nanjing, 2021">
+              <img src="assets/pages/page-36.jpg" alt="Untitle #8, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #8, Nanjing, 2021</span><small>Page 36</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #9, Nanjing, 2021" data-page="37">
+            <button class="image-button" type="button" aria-label="Open Untitle #9, Nanjing, 2021">
+              <img src="assets/pages/page-37.jpg" alt="Untitle #9, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #9, Nanjing, 2021</span><small>Page 37</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #10, Nanjing, 2021" data-page="38">
+            <button class="image-button" type="button" aria-label="Open Untitle #10, Nanjing, 2021">
+              <img src="assets/pages/page-38.jpg" alt="Untitle #10, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #10, Nanjing, 2021</span><small>Page 38</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #11, Nanjing, 2021" data-page="39">
+            <button class="image-button" type="button" aria-label="Open Untitle #11, Nanjing, 2021">
+              <img src="assets/pages/page-39.jpg" alt="Untitle #11, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #11, Nanjing, 2021</span><small>Page 39</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle #12, Nanjing, 2021" data-page="40">
+            <button class="image-button" type="button" aria-label="Open Untitle #12, Nanjing, 2021">
+              <img src="assets/pages/page-40.jpg" alt="Untitle #12, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle #12, Nanjing, 2021</span><small>Page 40</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle Cerasus #3, Nanjing, 2021" data-page="41">
+            <button class="image-button" type="button" aria-label="Open Untitle Cerasus #3, Nanjing, 2021">
+              <img src="assets/pages/page-41.jpg" alt="Untitle Cerasus #3, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle Cerasus #3, Nanjing, 2021</span><small>Page 41</small></figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="portfolio-section" id="part-four">
+        <div class="section-head">
+          <p class="eyebrow">PART FOUR</p>
+          <h2>第四部分<span>规训</span></h2>
+          <p>Blurred symbols and icons question how functional markings become visual discipline and collective memory.</p>
+        </div>
+        <div class="work-grid">
+          <figure class="work-card landscape text-panel" data-caption="PART FOUR / 第四部分 / 规训" data-page="42">
+            <button class="image-button" type="button" aria-label="Open PART FOUR / 第四部分 / 规训">
+              <img src="assets/pages/page-42.jpg" alt="PART FOUR / 第四部分 / 规训" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>PART FOUR / 第四部分 / 规训</span><small>Page 42</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Symbol #1, Nanjing, 2021" data-page="43">
+            <button class="image-button" type="button" aria-label="Open Symbol #1, Nanjing, 2021">
+              <img src="assets/pages/page-43.jpg" alt="Symbol #1, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Symbol #1, Nanjing, 2021</span><small>Page 43</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Icon #1, Nanjing, 2021" data-page="44">
+            <button class="image-button" type="button" aria-label="Open Icon #1, Nanjing, 2021">
+              <img src="assets/pages/page-44.jpg" alt="Icon #1, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Icon #1, Nanjing, 2021</span><small>Page 44</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Untitle Cerasus #4, Nanjing, 2021" data-page="45">
+            <button class="image-button" type="button" aria-label="Open Untitle Cerasus #4, Nanjing, 2021">
+              <img src="assets/pages/page-45.jpg" alt="Untitle Cerasus #4, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Untitle Cerasus #4, Nanjing, 2021</span><small>Page 45</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Symbol #2, Nanjing, 2021" data-page="46">
+            <button class="image-button" type="button" aria-label="Open Symbol #2, Nanjing, 2021">
+              <img src="assets/pages/page-46.jpg" alt="Symbol #2, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Symbol #2, Nanjing, 2021</span><small>Page 46</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Icon #2, Nanjing, 2021" data-page="47">
+            <button class="image-button" type="button" aria-label="Open Icon #2, Nanjing, 2021">
+              <img src="assets/pages/page-47.jpg" alt="Icon #2, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Icon #2, Nanjing, 2021</span><small>Page 47</small></figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="portfolio-section" id="part-five">
+        <div class="section-head">
+          <p class="eyebrow">PART FIVE</p>
+          <h2>第五部分<span>重视</span></h2>
+          <p>The work returns to the wider landscape, placing individual signs back into the ordered environment.</p>
+        </div>
+        <div class="work-grid">
+          <figure class="work-card landscape text-panel" data-caption="PART FIVE / 第五部分 / 重视" data-page="48">
+            <button class="image-button" type="button" aria-label="Open PART FIVE / 第五部分 / 重视">
+              <img src="assets/pages/page-48.jpg" alt="PART FIVE / 第五部分 / 重视" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>PART FIVE / 第五部分 / 重视</span><small>Page 48</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Overleaf: Cerasus #6, #7, #8, #9, #10, Nanjing, 2021" data-page="49">
+            <button class="image-button" type="button" aria-label="Open Overleaf: Cerasus #6, #7, #8, #9, #10, Nanjing, 2021">
+              <img src="assets/pages/page-49.jpg" alt="Overleaf: Cerasus #6, #7, #8, #9, #10, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Overleaf: Cerasus #6, #7, #8, #9, #10, Nanjing, 2021</span><small>Page 49</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Cerasus #6, Nanjing, 2021" data-page="50">
+            <button class="image-button" type="button" aria-label="Open Cerasus #6, Nanjing, 2021">
+              <img src="assets/pages/page-50.jpg" alt="Cerasus #6, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Cerasus #6, Nanjing, 2021</span><small>Page 50</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Cerasus #7, Nanjing, 2021" data-page="51">
+            <button class="image-button" type="button" aria-label="Open Cerasus #7, Nanjing, 2021">
+              <img src="assets/pages/page-51.jpg" alt="Cerasus #7, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Cerasus #7, Nanjing, 2021</span><small>Page 51</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Cerasus #8, Nanjing, 2021" data-page="52">
+            <button class="image-button" type="button" aria-label="Open Cerasus #8, Nanjing, 2021">
+              <img src="assets/pages/page-52.jpg" alt="Cerasus #8, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Cerasus #8, Nanjing, 2021</span><small>Page 52</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Cerasus #9, Nanjing, 2021" data-page="53">
+            <button class="image-button" type="button" aria-label="Open Cerasus #9, Nanjing, 2021">
+              <img src="assets/pages/page-53.jpg" alt="Cerasus #9, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Cerasus #9, Nanjing, 2021</span><small>Page 53</small></figcaption>
+          </figure>
+          <figure class="work-card landscape" data-caption="Cerasus #10, Nanjing, 2021" data-page="54">
+            <button class="image-button" type="button" aria-label="Open Cerasus #10, Nanjing, 2021">
+              <img src="assets/pages/page-54.jpg" alt="Cerasus #10, Nanjing, 2021" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Cerasus #10, Nanjing, 2021</span><small>Page 54</small></figcaption>
+          </figure>
+          <figure class="work-card landscape text-panel" data-caption="回到功能主义" data-page="55">
+            <button class="image-button" type="button" aria-label="Open 回到功能主义">
+              <img src="assets/pages/page-55.jpg" alt="回到功能主义" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>回到功能主义</span><small>Page 55</small></figcaption>
+          </figure>
+          <figure class="work-card portrait text-panel" data-caption="Hezi Portfolio" data-page="57">
+            <button class="image-button" type="button" aria-label="Open Hezi Portfolio">
+              <img src="assets/pages/page-57.jpg" alt="Hezi Portfolio" loading="lazy" decoding="async">
+            </button>
+            <figcaption><span>Hezi Portfolio</span><small>Page 57</small></figcaption>
+          </figure>
+        </div>
+      </section>
+  </main>
+
+  <footer class="footer">
+    <div><strong>HEZI PORTFOLIO</strong><br>Cerasus — Landscape society in order</div>
+    <div>Co-designed by ChatGPT and Hezi © Hezi</div>
+  </footer>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
+    <button class="lb-close" type="button" aria-label="Close">×</button>
+    <button class="lb-prev" type="button" aria-label="Previous image">‹</button>
+    <img alt="" id="lightboxImage">
+    <button class="lb-next" type="button" aria-label="Next image">›</button>
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+
+  <script>
+    const cards = Array.from(document.querySelectorAll('.work-card'));
+    const imageButtons = cards.map(card => card.querySelector('.image-button'));
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const closeButton = document.querySelector('.lb-close');
+    const prevButton = document.querySelector('.lb-prev');
+    const nextButton = document.querySelector('.lb-next');
+    const backgroundMusic = document.getElementById('backgroundMusic');
+    const audioToggle = document.getElementById('audioToggle');
+    const audioLabel = audioToggle.querySelector('span');
+    let activeIndex = 0;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .12 });
+    cards.forEach(card => observer.observe(card));
+
+    function openLightbox(index) {
+      activeIndex = index;
+      const card = cards[activeIndex];
+      const img = card.querySelector('img');
+      lightboxImage.src = img.currentSrc || img.src;
+      lightboxImage.alt = img.alt;
+      lightboxCaption.textContent = card.dataset.caption + ' / Page ' + String(card.dataset.page).padStart(2, '0');
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      lightboxImage.removeAttribute('src');
+    }
+
+    function move(delta) {
+      activeIndex = (activeIndex + delta + cards.length) % cards.length;
+      openLightbox(activeIndex);
+    }
+
+    imageButtons.forEach((button, index) => button.addEventListener('click', () => openLightbox(index)));
+    closeButton.addEventListener('click', closeLightbox);
+    prevButton.addEventListener('click', () => move(-1));
+    nextButton.addEventListener('click', () => move(1));
+    lightbox.addEventListener('click', event => {
+      if (event.target === lightbox) closeLightbox();
+    });
+    window.addEventListener('keydown', event => {
+      if (!lightbox.classList.contains('open')) return;
+      if (event.key === 'Escape') closeLightbox();
+      if (event.key === 'ArrowLeft') move(-1);
+      if (event.key === 'ArrowRight') move(1);
+    });
+
+    backgroundMusic.volume = .42;
+
+    function syncAudioButton() {
+      const playing = !backgroundMusic.paused;
+      audioToggle.classList.toggle('is-playing', playing);
+      audioToggle.setAttribute('aria-pressed', String(playing));
+      audioLabel.textContent = playing ? 'Pause Music' : 'Play Music';
+      audioToggle.setAttribute('aria-label', audioLabel.textContent);
+    }
+
+    async function playMusic() {
+      try {
+        await backgroundMusic.play();
+      } catch (error) {
+        return false;
+      }
+      syncAudioButton();
+      return true;
+    }
+
+    audioToggle.addEventListener('click', async () => {
+      if (backgroundMusic.paused) {
+        await playMusic();
+      } else {
+        backgroundMusic.pause();
+        syncAudioButton();
+      }
+    });
+
+    syncAudioButton();
+  </script>
+</body>
+</html>
