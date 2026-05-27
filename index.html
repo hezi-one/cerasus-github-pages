@@ -142,6 +142,57 @@
       background: var(--paper);
     }
 
+    .film-section {
+      display: grid;
+      grid-template-columns: minmax(260px, .38fr) minmax(320px, .62fr);
+      gap: clamp(1.4rem, 5vw, 5rem);
+      align-items: center;
+      padding: clamp(3rem, 7vw, 7rem) clamp(1rem, 5vw, 5rem);
+      border-top: 1px solid var(--line);
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.035), transparent 48%),
+        rgba(255,255,255,.015);
+    }
+    .film-copy {
+      max-width: 34rem;
+    }
+    .film-copy h2 {
+      font-size: clamp(2.6rem, 7vw, 6.2rem);
+      line-height: .92;
+      letter-spacing: .04em;
+    }
+    .film-copy p:last-child {
+      margin: 1.35rem 0 0;
+      color: var(--muted);
+      max-width: 31rem;
+    }
+    .film-frame {
+      position: relative;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 1.25rem;
+      padding: clamp(.55rem, 1.5vw, .85rem);
+      background: rgba(255,255,255,.045);
+      box-shadow: 0 28px 80px rgba(0,0,0,.34);
+      overflow: hidden;
+    }
+    .film-frame::before {
+      content: "";
+      position: absolute;
+      inset: .85rem;
+      border: 1px solid rgba(243,242,236,.1);
+      border-radius: .9rem;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .film-frame iframe {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: 0;
+      border-radius: .8rem;
+      background: #101410;
+    }
+
     .portfolio-section {
       padding: clamp(3rem, 7vw, 8rem) clamp(1rem, 5vw, 5rem);
       border-top: 1px solid var(--line);
@@ -324,6 +375,7 @@
         justify-self: center;
         transform: rotate(.4deg);
       }
+      .film-section { grid-template-columns: 1fr; }
       .section-head { grid-template-columns: 1fr; }
       .work-card, .work-card.landscape, .work-card.text-panel { grid-column: span 6; }
     }
@@ -345,6 +397,7 @@
     <a class="brand" href="#top">Cerasus</a>
     <nav aria-label="Portfolio sections">
       <a href="#intro">Portfolio / 作品集</a>
+          <a href="#film">Film</a>
           <a href="#part-one">PONE</a>
           <a href="#part-two">PTWO</a>
           <a href="#part-three">PTHREE</a>
@@ -376,6 +429,23 @@
       <figure class="hero-plate">
         <img src="assets/pages/page-01.jpg" alt="Cerasus portfolio cover">
       </figure>
+    </section>
+
+    <section class="film-section" id="film" aria-labelledby="film-title">
+      <div class="film-copy">
+        <p class="eyebrow">Book Film / 翻书影像</p>
+        <h2 id="film-title">Cerasus in motion</h2>
+        <p>纸页的翻动把作品从静态图像带回到书的节奏里。观看这段翻书视频，可以看到页面、装帧和阅读动作如何共同构成 Cerasus 的另一层现场。</p>
+      </div>
+      <div class="film-frame" aria-label="Cerasus book flip-through video">
+        <iframe
+          src="https://player.bilibili.com/player.html?bvid=BV13k4y1h7Rk&page=1&high_quality=1&autoplay=0"
+          title="Cerasus book flip-through video on Bilibili"
+          loading="lazy"
+          allow="fullscreen; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
     </section>
 
     
