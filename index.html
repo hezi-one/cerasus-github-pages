@@ -271,14 +271,14 @@
 
     .contact-section {
       display: grid;
-      grid-template-columns: minmax(260px, .52fr) minmax(260px, .48fr);
+      grid-template-columns: minmax(260px, .58fr) minmax(220px, .42fr);
       gap: clamp(1.5rem, 6vw, 6rem);
       align-items: center;
       padding: clamp(4rem, 8vw, 8rem) clamp(1rem, 5vw, 5rem);
       border-top: 1px solid var(--line);
       background:
-        linear-gradient(180deg, rgba(255,255,255,.018), rgba(255,255,255,.045)),
-        radial-gradient(circle at 78% 42%, rgba(191, 82, 134, .16), transparent 24rem);
+        linear-gradient(180deg, rgba(255,255,255,.012), rgba(255,255,255,.032)),
+        radial-gradient(circle at 78% 42%, rgba(243, 242, 236, .055), transparent 20rem);
     }
     .contact-copy h2 {
       font-size: clamp(2.8rem, 7vw, 6.4rem);
@@ -292,44 +292,26 @@
     }
     .qr-card {
       justify-self: end;
-      width: min(430px, 100%);
-      border: 1px solid rgba(255,255,255,.18);
-      border-radius: 1.25rem;
-      padding: clamp(.75rem, 2vw, 1.1rem);
-      background: rgba(255,255,255,.06);
-      box-shadow: 0 30px 90px rgba(0,0,0,.34);
-      transform: rotate(-.7deg);
+      width: min(260px, 64vw);
+      margin: 0;
+      border: 1px solid rgba(243,242,236,.08);
+      border-radius: .7rem;
+      padding: clamp(.55rem, 1.5vw, .8rem);
+      background: rgba(243,242,236,.018);
+      box-shadow: 0 24px 70px rgba(0,0,0,.2);
+      transform: rotate(-.35deg);
     }
     .qr-card-inner {
-      padding: clamp(1rem, 3vw, 1.45rem);
-      border-radius: .9rem;
-      background: #f8f7f3;
-      color: #202721;
+      border-radius: .45rem;
+      background: transparent;
     }
     .qr-card img {
       display: block;
       width: 100%;
-      border-radius: .55rem;
-      background: #fff;
-    }
-    .qr-caption {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-top: 1rem;
-      color: rgba(32,39,33,.64);
-      font-size: .82rem;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-    .qr-caption strong {
-      color: #202721;
-      font-family: var(--serif);
-      font-size: 1.45rem;
-      font-weight: 400;
-      letter-spacing: .06em;
-      text-transform: none;
+      border-radius: .35rem;
+      filter: invert(1);
+      opacity: .42;
+      mix-blend-mode: screen;
     }
 
     .footer {
@@ -453,7 +435,7 @@
       .lb-prev, .lb-next { display: none; }
       figcaption { flex-direction: column; gap: .3rem; }
       .contact-section { padding-bottom: 5rem; }
-      .qr-caption { align-items: flex-start; flex-direction: column; gap: .45rem; }
+      .qr-card { width: min(220px, 72vw); }
       .audio-toggle { min-width: 3rem; padding-inline: .8rem; }
       .audio-toggle span { display: none; }
     }
@@ -910,11 +892,7 @@
     </div>
     <figure class="qr-card">
       <div class="qr-card-inner">
-        <img src="assets/contact/wechat-qr.jpg" alt="何子微信二维码" loading="lazy" decoding="async">
-        <figcaption class="qr-caption">
-          <strong>何子</strong>
-          <span>WeChat QR Code</span>
-        </figcaption>
+        <img src="assets/contact/wechat-qr-mono.png" alt="微信二维码" loading="lazy" decoding="async">
       </div>
     </figure>
   </section>
